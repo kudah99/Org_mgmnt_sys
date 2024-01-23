@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Member\MemberController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('members.index');
-});
+Route::get('/',[MemberController::class,'index'])->name('home');
+Route::post('/save', [MemberController::class, 'store'])->name('validate.form');
