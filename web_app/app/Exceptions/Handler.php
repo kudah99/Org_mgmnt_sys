@@ -21,10 +21,28 @@ class Handler extends ExceptionHandler
     /**
      * Register the exception handling callbacks for the application.
      */
-    public function register(): void
+    public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (AuthenticationException $exception, Request $request) {
+            if ($request->is('api/*')) {
+                if ($exception instanceof AuthenticationException) {
+                    return $request->expectsJson() ?:
+                        response()->json([
+                            'message' => 'Unauthenticated.',
+                            'status' => 401,
+                            'Description' => 'Missing or Invalid Access Token'
+                        ], 401);
+                }
+            }
         });
+    }
+    
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+
+        return response()->json([
+            'message' => 'Succesfully Logged out'
+        ], 200);
     }
 }
