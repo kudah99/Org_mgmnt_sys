@@ -15,3 +15,5 @@ use App\Http\Controllers\Member\MemberController;
 
 Route::get('/',[MemberController::class,'index'])->name('home');
 Route::post('/save', [MemberController::class, 'store'])->name('validate.form');
+// Route::get('/login', [MemberController::class, 'login'])->name('login');
+// Route::get('login-submit', [MemberController::class, 'login-submit'])->name('login-submit');

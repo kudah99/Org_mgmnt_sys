@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class  MemberController extends Controller
 {
-    public function index(Request $request){
+    public function view_index(Request $request){
         $search = $request->input('search');
 
     $members = Member::where('first_name', 'LIKE', "%$search%")
@@ -20,7 +20,7 @@ class  MemberController extends Controller
         ->get(); 
     return view('members.index', compact('members'));}
 
-public function store(Request $request)
+public function view_store(Request $request)
     {
         // Validate the form data
          $request->validate([
