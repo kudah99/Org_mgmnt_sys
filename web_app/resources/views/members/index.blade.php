@@ -7,7 +7,7 @@
   <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
       <div>
         <div class="inline-flex items-center text-gray-600 font-bold mr-4 text-2xl">Organisation Members Database</div>
-          <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"  class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+          <button data-modal-target="member_form_popup-modal" data-modal-toggle="member_form_popup-modal"  class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
                 Add new member
           </button>
 
@@ -32,6 +32,7 @@
                     <th scope="col" class="px-6 py-3">Birth Date</th>
                     <th scope="col" class="px-6 py-3">Address</th>
                     <th scope="col" class="px-6 py-3">Gender</th>
+                    <th scope="col" class="px-6 py-3"></th>
           </tr>
       </thead>
       <tbody>
@@ -45,6 +46,9 @@
             <td class="px-6 py-4">{{ $member->birth_date }}</td>
             <td class="px-6 py-4">{{ $member->address }}</td>
             <td class="px-6 py-4">{{ $member->gender }}</td>
+            <td class="px-6 py-4">
+                <a data-modal-target="member_contrib_form_popup-modal" data-modal-toggle="member_form_popup-modal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View contribution</a>
+            </td>
         </tr>
     @endforeach
       </tbody>
@@ -52,8 +56,8 @@
 </div>
 
 {{-- add new user member form --}}
-<div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
+<div id="member_form_popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-lg">
         <h2 class="text-2xl font-bold mb-4">Add Member</h2>
         <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -109,4 +113,15 @@
     </div>
 </div>
 
+<div id="member_contrib_form_popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">Add Member</h2>
+        <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+        </button>
+    </div>
+</div>
 @endsection

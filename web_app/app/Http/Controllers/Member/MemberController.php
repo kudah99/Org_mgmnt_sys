@@ -9,10 +9,18 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
+    /**
+     * Display the index view with a list of members based on search criteria.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
     public function view_index(Request $request)
     {
+        // Get the search term from the request
         $search = $request->input('search');
 
+        // Search for members based on multiple fields
         $members = Member::where('first_name', 'LIKE', "%$search%")
             ->orWhere('last_name', 'LIKE', "%$search%")
             ->orWhere('email', 'LIKE', "%$search%")
@@ -20,9 +28,17 @@ class MemberController extends Controller
             ->orWhere('address', 'LIKE', "%$search%")
             ->orWhere('gender', 'LIKE', "%$search%")
             ->get();
+
+        // Pass the found members to the 'members.index' view
         return view('members.index', compact('members'));
     }
 
+    /**
+     * Store a new member in the database.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function view_store(Request $request)
     {
         // Validate the form data
@@ -36,6 +52,7 @@ class MemberController extends Controller
             'gender' => 'required|in:male,female',
         ]);
 
+        // Create a new member record using Eloquent
         $member = new Member();
         $member->first_name = $request->input('first_name');
         $member->last_name = $request->input('last_name');
@@ -45,65 +62,85 @@ class MemberController extends Controller
         $member->gender = $request->input('gender');
         $member->save();
 
-        // You can add any additional logic here, such as sending a confirmation email
+        // Additional logic (e.g., sending confirmation email) can be added here
 
-        // Redirect back or to a success page
+        // Redirect back with a success message
         return redirect()->back()->with('success', 'Member added successfully!');
     }
 
     /**
-     * Display a listing of the resource.
+     * Retrieve all members as a JSON resource collection.
      *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
+        // Return a JSON resource collection of all members
         return MemberResource::collection(Member::all());
     }
 
-
     /**
-     * Store a newly created resource in storage.
+     * Store a new member in the database and return it as a JSON resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function store(Request $request)
     {
+        // Create a new member using Eloquent mass assignment
+        $member = Member::create($request->all());
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  Member $member
-
-     */
-    public function show(Member $member)
-    {
+        // Return the new member as a JSON resource
         return new MemberResource($member);
     }
 
-
     /**
-     * Update the specified resource in storage.
+     * Retrieve a specific member by its ID as a JSON resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Member $member
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function update(Request $request, Member $member)
+    public function show($id)
     {
-        //
+        // Find the member by its ID and return it as a JSON resource
+        return new MemberResource(Member::findOrFail($id));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Update an existing member in the database and return it as a JSON resource.
      *
-     * @param  Member $member
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
-    public function destroy(Member $member)
+    public function update(Request $request, $id)
     {
-        $member->delete();
-   return response()->json(null,204);
+        // Find the member by its ID
+        $member = Member::findOrFail($id);
+
+        // Update the member with the specified fields from the request
+        $member->update($request->only("amount", "package"));
+
+        // Return the updated member as a JSON resource
+        return new MemberResource($member);
+    }
+
+    /**
+     * Delete a member from the database.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($id)
+    {
+        // Find and delete the member by its ID
+        Member::findOrFail($id)->delete();
+
+        // Return a JSON response indicating success
+        return response()->json([
+            "data" => [
+                "success" => true
+            ]
+        ]);
     }
 }
