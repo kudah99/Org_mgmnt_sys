@@ -32,7 +32,7 @@ class RemoteMembersContribRepository implements MembersContribRepository {
         await http.put(url, body: jsonEncode(memberContrib.toJson()));
 
     if (response.statusCode == 200) {
-      //print(response.body);
+      print(response.body);
       return response.body;
     } else {
       throw Exception('Failed to update member contribution');
