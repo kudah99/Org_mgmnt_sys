@@ -47,7 +47,7 @@
             <td class="px-6 py-4">{{ $member->address }}</td>
             <td class="px-6 py-4">{{ $member->gender }}</td>
             <td class="px-6 py-4">
-                <a data-modal-target="member_contrib_form_popup-modal" data-modal-toggle="member_form_popup-modal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View contribution</a>
+                
             </td>
         </tr>
     @endforeach
