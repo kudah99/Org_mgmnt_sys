@@ -1,0 +1,132 @@
+# Organisation Management System - Interview task
+
+## Introduction
+
+This project aims to provide a comprehensive guide on setting up a Laravel web application,
+ a Flutter mobile application, and a Docker environment for the Laravel application. 
+ The Laravel web application serves as the backend, providing APIs for the Flutter mobile application.
+
+## Laravel Web Application
+
+### Prerequisites
+
+- PHP >= 7.3
+- Composer
+- Postgres
+- Docker
+- Laravel CLI
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/kudah99/Org_mgmnt_sys.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd web_app
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   composer install
+   ```
+
+4. Create a copy of the `.env.example` file and rename it to `.env`. Update the database configuration with your credentials.
+
+   ```bash
+   cp .env.example .env
+   ```
+
+5. Generate the application key:
+
+   ```bash
+   php artisan key:generate
+   ```
+
+6. Run database migrations and seed:
+
+   ```bash
+   php artisan migrate --seed
+   ```
+
+7. Start the development server:
+
+   ```bash
+   php artisan serve
+   ```
+
+8. Visit [http://localhost:8000](http://localhost:8000) to access your Laravel web application.
+
+### Live Demo
+
+Visit the live demo of the Laravel app at [Your Laravel App Live Demo](http://your-laravel-app-live-demo-url).
+
+### API Documentation
+
+Explore the API documentation at [API Documentation](http://your-laravel-app-api-docs-url).
+
+## Flutter Mobile Application
+
+### Prerequisites
+
+- Flutter SDK
+- Dart SDK
+- Android Studio / Xcode for emulator or physical devices
+
+### Installation
+
+1. Clone the Flutter project:
+
+   ```bash
+   git clone https://github.com/kudah99/Org_mgmnt_sys.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd mobile_app
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   flutter pub get
+   ```
+
+4. Run the app:
+
+   ```bash
+   flutter run
+   ```
+
+### APK Download
+
+Download the Flutter APK at [Your Flutter App APK](http://your-flutter-app-apk-url).
+
+## Docker Setup for Laravel
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Setup
+
+1. Navigate to the Laravel project directory.
+
+   ```bash
+   cd web_app
+   ```
+
+2. Build and run the Docker containers:
+
+   ```bash
+   docker-compose up -d --build
+   ```
+
+5. Visit [http://localhost:8000](http://localhost:8000) to access your Laravel web application.

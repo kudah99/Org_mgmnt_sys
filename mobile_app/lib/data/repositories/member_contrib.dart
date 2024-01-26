@@ -1,5 +1,6 @@
 // Base class for data access
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:mobile_app/data/models/member_contrib.dart';
 
@@ -19,21 +20,25 @@ class RemoteMembersContribRepository implements MembersContribRepository {
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body) as Map<String, dynamic>;
+
       return MemberContrib.fromJson(jsonData['data']);
     } else {
       throw Exception('Failed to fetch member contribution');
     }
   }
 
-  Future<dynamic> updateMemberContrib(
+  Future<http.Response> updateMemberContrib(
       MemberContrib memberContrib, int memberId) async {
     final url = Uri.parse('$baseUrl/api/v1/members_contribution/$memberId');
-    final response =
-        await http.put(url, body: jsonEncode(memberContrib.toJson()));
+    final payLoad = {
+      "amount": "${memberContrib.amount}",
+      "package": "${memberContrib.package}"
+    };
+    final response = await http.put(url, body: payLoad);
+    print(response.body);
 
     if (response.statusCode == 200) {
-      print(response.body);
-      return response.body;
+      return response;
     } else {
       throw Exception('Failed to update member contribution');
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/constants/constants.dart';
 import 'package:mobile_app/data/models/member_contrib.dart';
 import 'package:mobile_app/data/repositories/member_contrib.dart';
+import 'package:fluent_ui/fluent_ui.dart' as FL;
 
 class MemberContributionForm extends StatefulWidget {
   const MemberContributionForm({super.key, required this.member_id});
@@ -18,6 +19,10 @@ class _MemberContributionFormState extends State<MemberContributionForm> {
   final _packageController =
       TextEditingController(); // Store selected package value
 
+  bool hasFormResponse = false;
+
+  String formResponse = 'Member Contribution updated successfull';
+
   MemberContrib _memberContrib = MemberContrib(
     memberId: 123, // Replace with actual member ID
     amount: '0.0',
@@ -32,21 +37,48 @@ class _MemberContributionFormState extends State<MemberContributionForm> {
     _memberContrib = _memberContrib.copyWith(package: value);
   }
 
-  Future<void> _onSubmitPressed() async {
+  Future<void> _onSubmitPressed(context) async {
     // Update member contribution
+    print(_memberContrib.amount + '  ' + _memberContrib.package);
     final response = await RemoteMembersContribRepository(baseUrl)
         .updateMemberContrib(_memberContrib, widget.member_id);
 
-    print(response);
+    if (response.statusCode == 200) {
+      setState(() {
+        hasFormResponse = true;
+        formResponse = "Member Contribution updated successfull";
+      });
+    } else {
+      setState(() {
+        hasFormResponse = true;
+        formResponse = "Member Contribution updated failed. Please try again!";
+      });
+    }
   }
 
   Widget build(BuildContext context) {
+    final theme = FL.FluentTheme.of(context);
     return Scaffold(
       appBar: AppBar(title: Text('Update Member Contribution')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            hasFormResponse
+                ? Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: theme.resources.cardBackgroundFillColorDefault,
+                        borderRadius: BorderRadius.circular(8.0),
+                        border: Border.all(
+                          color: theme.resources.controlStrokeColorSecondary,
+                        ),
+                      ),
+                    ),
+                  )
+                : Text(""),
             TextField(
               controller: _memberIdController,
               enabled: false, // Pre-filled, non-editable
@@ -69,7 +101,9 @@ class _MemberContributionFormState extends State<MemberContributionForm> {
             ),
             const SizedBox(height: 20.0),
             FilledButton(
-              onPressed: _onSubmitPressed,
+              onPressed: () {
+                _onSubmitPressed(context);
+              },
               child: Text('Update Contribution'),
             ),
           ],
