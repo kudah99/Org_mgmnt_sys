@@ -2,9 +2,18 @@
 
 ## Introduction
 
-This project aims to provide a comprehensive guide on setting up a Laravel web application,
- a Flutter mobile application, and a Docker environment for the Laravel application. 
- The Laravel web application serves as the backend, providing APIs for the Flutter mobile application.
+This project is an exciting interview application assignment to test expertise
+in web development and mobile app synchronization. This is an comprehensive guide on setting up a  Laravel web application,
+a Flutter mobile application, and a Docker environment for the Laravel application.
+The Laravel web application serves as the backend, providing APIs for the Flutter mobile application.
+
+### Interview project tasks
+- <b>PHASE1: WEB DEVELOPMENT TASKS:</b>
+  - [X] Implement a registration system for members of the organisation with basic details
+  - [X] Create a searchable member directory
+- <b>PHASE 2: MOBILE DEVELOPMENT TASKS (FLUTTER)</b>
+  - [X] Implement a basic system to record member contributions.
+  - [X] Create a view to display individual contribution statements.
 
 ## Laravel Web Application
 
@@ -13,7 +22,7 @@ This project aims to provide a comprehensive guide on setting up a Laravel web a
 - PHP >= 7.3
 - Composer
 - Postgres
-- Docker
+- Docker (Optional)
 - Laravel CLI
 
 ### Installation
@@ -22,6 +31,8 @@ This project aims to provide a comprehensive guide on setting up a Laravel web a
 
    ```bash
    git clone https://github.com/kudah99/Org_mgmnt_sys.git
+   # you can checkout into other branches for specific feature  
+   # To view other branches run git branch
    ```
 
 2. Navigate to the project directory:
@@ -59,6 +70,28 @@ This project aims to provide a comprehensive guide on setting up a Laravel web a
    ```bash
    php artisan serve
    ```
+### Optional docker Setup for Laravel
+
+#### Prerequisites
+
+- Docker
+- Docker Compose
+
+#### Setup
+
+1. Navigate to the Laravel project directory.
+
+   ```bash
+   cd web_app
+   ```
+
+2. Build and run the Docker containers:
+
+   ```bash
+   docker-compose up -d --build
+   ```
+
+3. Visit [http://localhost:8000](http://localhost:8000) to access your Laravel web application.
 
 8. Visit [http://localhost:8000](http://localhost:8000) to access your Laravel web application.
 
@@ -108,25 +141,4 @@ Explore the API documentation at [API Documentation](http://your-laravel-app-api
 
 Download the Flutter APK at [Your Flutter App APK](http://your-flutter-app-apk-url).
 
-## Docker Setup for Laravel
 
-### Prerequisites
-
-- Docker
-- Docker Compose
-
-### Setup
-
-1. Navigate to the Laravel project directory.
-
-   ```bash
-   cd web_app
-   ```
-
-2. Build and run the Docker containers:
-
-   ```bash
-   docker-compose up -d --build
-   ```
-
-5. Visit [http://localhost:8000](http://localhost:8000) to access your Laravel web application.
