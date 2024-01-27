@@ -59,12 +59,6 @@ The Laravel web application serves as the backend, providing APIs for the Flutte
    php artisan key:generate
    ```
 
-6. Run database migrations and seed:
-
-   ```bash
-   php artisan migrate --seed
-   ```
-
 7. Start the development server:
 
    ```bash
@@ -93,15 +87,14 @@ The Laravel web application serves as the backend, providing APIs for the Flutte
 
 3. Visit [http://localhost:8000](http://localhost:8000) to access your Laravel web application.
 
-8. Visit [http://localhost:8000](http://localhost:8000) to access your Laravel web application.
 
 ### Live Demo
 
-Visit the live demo of the Laravel app at [Your Laravel App Live Demo](http://your-laravel-app-live-demo-url).
+Visit the live demo of the Laravel app at [Your Laravel App Live Demo](https://oms-ivory.vercel.app/).
 
 ### API Documentation
 
-Explore the API documentation at [API Documentation](http://your-laravel-app-api-docs-url).
+Explore the API documentation at [API Documentation](https://oms-ivory.vercel.app/docs).
 
 ## Flutter Mobile Application
 
@@ -139,6 +132,6 @@ Explore the API documentation at [API Documentation](http://your-laravel-app-api
 
 ### APK Download
 
-Download the Flutter APK at [Your Flutter App APK](http://your-flutter-app-apk-url).
+Download the Flutter APK at [Your Flutter App APK](https://drive.google.com/file/d/1d-XXCiJrcFVmVQS3zG7oJxKHUXMwbNSd/view?usp=sharing).
 
 
